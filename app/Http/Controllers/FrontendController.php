@@ -359,72 +359,16 @@ class FrontendController extends Controller
     public function login(){
         return view('frontend.pages.login');
     }
-    public function loginSubmit(Request $request)
-    {
-        $data = $request->all();
-    
-        $credentials = [
-            'email' => $data['email'],
-            'password' => $data['password'],
-            'status' => 'active',
-        ];
-    
-        // Check if the user exists
-        $user = User::where('email', $data['email'])->first();
-    
-        if (!$user) {
-            request()->session()->flash('error', 'Invalid email. Please try again!');
-            return redirect()->back();
+    public function loginSubmit(Request $request){
+        $data= $request->all();
+        if(Auth::attempt(['email' => $data['email'], 'password' => $data['password'],'status'=>'active'])){
+            Session::put('user',$data['email']);
+            request()->session()->flash('success','Successfully login');
+            return redirect()->route('home');
         }
-      // Check if the user has verified their email
-      if (!$user->hasVerifiedEmail()) {
-        // Resend the verification email
-        $user->sendEmailVerificationNotification();
-
-        request()->session()->flash('error', 'Please verify your email. A new verification link has been sent.');
-        return redirect()->back();
-       }
-
-        // Check if the user has verified their email
-        if (!$user->hasVerifiedEmail()) {
-            // Attempt to authenticate the user
-           
-            if (Auth::attempt($credentials)) {
-                // Send email verification notification
-                $user->sendEmailVerificationNotification();
-    
-                // Check if the user has been logged in within the last 2 minutes
-                $lastLogin = $user->email_verified_at;
-                $twoMinutesAgo = Carbon::now()->subMinutes(2);
-    
-                if ($lastLogin && $lastLogin->gt($twoMinutesAgo)) {
-                    // User has logged in within the last 2 minutes, update last login time
-                    $user->email_verified_at = Carbon::now();
-                    $user->save();
-                    Session::put('user', $data['email']);
-                    request()->session()->flash('success', 'You are successfully logged in. Verification link sent.');
-                    return redirect()->route('home');
-                } else {
-                    Auth::logout(); // Logout the user if the last login is more than 2 minutes ago
-                    request()->session()->flash('error', 'Session expired. Verification link sent.');
-                    return redirect()->route('login.form');
-                }
-            } else {
-                request()->session()->flash('error', 'Invalid password. Please try again!');
-                return redirect()->back();
-            }
-        } else {
-            // User is already verified, proceed with the regular login logic
-            if (Auth::attempt($credentials)) {
-                $user->email_verified_at = Carbon::now();
-                $user->save();
-                Session::put('user', $data['email']);
-                request()->session()->flash('success', 'You are successfully logged in.');
-                return redirect()->route('home');
-            } else {
-                request()->session()->flash('error', 'Invalid password. Please try again!');
-                return redirect()->back();
-            }
+        else{
+            request()->session()->flash('error','Invalid email and password pleas try again!');
+            return redirect()->back();
         }
     }
     
@@ -451,21 +395,19 @@ class FrontendController extends Controller
         $this->validate($request, [
             'name' => 'string|required|min:2',
             'email' => 'string|required|unique:users,email',
-            'password' => 'required|min:6|confirmed',
-            'phone_number' => 'required|string',
-            'id_number' => 'required|string|unique:users,id_number',
+            'password' => 'required|min:6|confirmed'
         ]);
 
         $data = $request->all();
         $user = $this->create($data);
 
         // Send email verification notification
-        $user->sendEmailVerificationNotification();
+        
 
         Session::put('user', $data['email']);
 
         if ($user) {
-            request()->session()->flash('success', 'Successfully registered. Verification email sent!');
+            request()->session()->flash('success', 'Successfully registered');
             return redirect()->route('home');
         } else {
             request()->session()->flash('error', 'Please try again!');

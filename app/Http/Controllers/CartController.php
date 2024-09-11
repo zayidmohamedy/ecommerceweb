@@ -51,7 +51,7 @@ class CartController extends Controller
             $wishlist=Wishlist::where('user_id',auth()->user()->id)->where('cart_id',null)->update(['cart_id'=>$cart->id]);
         }
         request()->session()->flash('success','Product successfully added to cart');
-        return back();       
+        return view('frontend.pages.cart');      
     }  
 
     public function singleAddToCart(Request $request){

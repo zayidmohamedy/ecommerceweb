@@ -18,7 +18,7 @@
     use App\Http\Controllers\NotificationController;
     use App\Http\Controllers\HomeController;
     use \UniSharp\LaravelFilemanager\Lfm;
- 
+    use Illuminate\Support\Facades\File;
 
     use App\Models\User;
  
@@ -44,9 +44,10 @@
 
     // STORAGE LINKED ROUTE
     Route::get('storage-link',[AdminController::class,'storageLink'])->name('storage.link');
+    Route::get('/admin/storage-link', [AdminController::class, 'storageLink'])->name('admin.storage.link');
 
     Auth::routes(['verify' => true]);
-   
+     
     // // Route::get('/email/verify/{id}/{hash}', [FrontendController::class, 'verify'])->name('verification.verify');
     // Route::post('/email/resend', 'Auth\VerificationController@resend')->name('verification.resend');
    

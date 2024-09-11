@@ -47,7 +47,7 @@
 					<div class="row">
 						<div class="col-lg-6 col-12">
 							<div class="left">
-								<p>Copyright © {{date('Y')}} <a href="https://www.kaizenitbd.com/" target="_blank">kaizen It ltd</a>  -  All Rights Reserved.</p>
+								<p>Copyright © {{date('Y')}} Samo's   -  All Rights Reserved.</p>
 							</div>
 						</div>
 						<div class="col-lg-6 col-12">

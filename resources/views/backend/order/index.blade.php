@@ -20,9 +20,9 @@
               <th>S.N.</th>
               <th>Order No.</th>
               <th>Name</th>
-              <th>Email</th>
+              <th>Email</th> 
+              <th>Phone</th>
               <th>Quantity</th>
-              <th>Charge</th>
               <th>Total Amount</th>
               <th>Status</th>
               <th>Action</th>
@@ -34,8 +34,8 @@
               <th>Order No.</th>
               <th>Name</th>
               <th>Email</th>
+              <th>Phone</th>
               <th>Quantity</th>
-              <th>Charge</th>
               <th>Total Amount</th>
               <th>Status</th>
               <th>Action</th>
@@ -51,8 +51,8 @@
                     <td>{{$order->order_number}}</td>
                     <td>{{$order->first_name}} {{$order->last_name}}</td>
                     <td>{{$order->email}}</td>
+                    <td>{{$order->phone}}</td>
                     <td>{{$order->quantity}}</td>
-                    <td>@foreach($shipping_charge as $data) Tk {{number_format($data,2)}} @endforeach</td>
                     <td>Tk{{number_format($order->total_amount,2)}}</td>
                     <td>
                         @if($order->status=='new')
@@ -66,7 +66,7 @@
                         @endif
                     </td>
                     <td>
-                        <a href="{{route('order.show',$order->id)}}" class="btn btn-warning btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="view" data-placement="bottom"><i class="fas fa-eye"></i></a>
+                        
                         <a href="{{route('order.edit',$order->id)}}" class="btn btn-primary btn-sm float-left mr-1" style="height:30px; width:30px;border-radius:50%" data-toggle="tooltip" title="edit" data-placement="bottom"><i class="fas fa-edit"></i></a>
                         <form method="POST" action="{{route('order.destroy',[$order->id])}}">
                           @csrf 

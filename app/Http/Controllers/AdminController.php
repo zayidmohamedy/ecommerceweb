@@ -28,6 +28,20 @@ class AdminController extends Controller
      return view('backend.index')->with('users', json_encode($array));
     }
 
+    public function storageLink()
+        {
+            try {
+                // Call the Artisan command to create the symbolic link
+                \Artisan::call('storage:link');
+                request()->session()->flash('success', 'Storage link created successfully!');
+            } catch (\Exception $e) {
+                request()->session()->flash('error', 'Failed to create storage link: ' . $e->getMessage());
+            }
+
+            return redirect()->back();
+        }
+
+
     public function profile(){
         $profile=Auth()->user();
         // return $profile;

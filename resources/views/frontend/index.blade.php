@@ -1,5 +1,5 @@
 @extends('frontend.layouts.master')
-@section('title','Samos || HOME PAGE')
+@section('title',"Samo's || HOME PAGE")
 @section('main-content')
 <!-- Slider Area -->
 @if(count($banners)>0)
@@ -128,15 +128,14 @@
 
 
                                             </a>
-                                            <div class="button-head">
-                                                <div class="product-action">
-                                                    <a data-toggle="modal" data-target="#{{$product->id}}" title="Quick View" href="#"><i class=" ti-eye"></i><span>Quick Shop</span></a>
-                                                    <a title="Wishlist" href="{{route('add-to-wishlist',$product->slug)}}" ><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
+                                        <div class="button-head">
+                                                 
+                                              
+                                                <div class=" product-action-2  text-warning rounded-circle text-center">
+                                                    <a class="text-warning h2" href="{{route('add-to-cart',$product->slug)}}">Order</a>
                                                 </div>
-                                                <div class="product-action-2">
-                                                    <a title="Add to cart" href="{{route('add-to-cart',$product->slug)}}">Add to cart</a>
-                                                </div>
-                                            </div>
+                                            
+                                        </div> 
                                         </div>
                                         <div class="product-content">
                                             <h3><a href="{{route('product-detail',$product->slug)}}">{{$product->title}}</a></h3>
@@ -288,13 +287,11 @@
                                                 <!--/ End Input Order -->
                                             </div>
                                             <div class="add-to-cart">
-                                                <button type="submit" class="btn">Add to cart</button>
-                                                <a href="{{route('add-to-wishlist',$product->slug)}}" class="btn min"><i class="ti-heart"></i></a>
+                                                <button type="submit  " class="btn  ">Order</button>
+                                                 
                                             </div>
                                         </form>
-                                        <div class="default-social">
-                                        <!-- ShareThis BEGIN --><div class="sharethis-inline-share-buttons"></div><!-- ShareThis END -->
-                                        </div>
+                                         
                                     </div>
                                 </div>
                             </div>
