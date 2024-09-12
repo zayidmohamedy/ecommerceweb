@@ -55,8 +55,7 @@ Many more....
 
  
  ## Author Contact
-[zayidmohamed](https://github.com/zayidmohamedy) and 
-  [safiyoow](https://github.com/safiyoow)
+[zayidmohamed](https://github.com/zayidmohamedy) 
 
 
   ## License
