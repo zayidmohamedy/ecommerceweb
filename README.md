@@ -69,7 +69,7 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
   ## License
   This project is [MIT](https://choosealicense.com/licenses/mit/) licensed.<br />
 <hr>
-  Copyright © 2023 kaizen ltd
+  Copyright © 2024 kaizen ltd
   
 <p style="text-align:center">Thank You so much for your time !!!</p>
 
